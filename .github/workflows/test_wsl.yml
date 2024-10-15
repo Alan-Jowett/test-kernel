@@ -18,8 +18,19 @@ jobs:
     - name: Download Ubuntu 24.04 Base Image
       run: Invoke-WebRequest -Uri https://cdimage.ubuntu.com/ubuntu-base/releases/24.04/release/ubuntu-base-24.04.1-base-amd64.tar.gz -OutFile ubuntu-base-24.04.1-base-amd64.tar.gz
       
+    - name: Copy kernel to %USERPROFILE% from kernel_images\bpf_next
+      run: Copy-Item -Path "kernel_images\bpf_next" -Destination "$env:USERPROFILE" -Recurse
+
+    - name: Copy .wslconfig to %USERPROFILE%
+      run: Copy-Item -Path ".wslconfig" -Destination "$env:USERPROFILE" -Recurse
+
     - name: Install Ubuntu 24.04 Base Image
       run: wsl --import Ubuntu-24.04 .\Ubuntu-24.04 .\ubuntu-base-24.04.1-base-amd64.tar.gz --version 2
+
+    - name: Restart WSL
+      run: |
+        wsl --shutdown
+        wsl --set-version Ubuntu-24.04 2
 
     - name: Launch WSL
       run: |
