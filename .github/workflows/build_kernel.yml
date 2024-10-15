@@ -37,6 +37,7 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: bzImage
+        path: bpf-next/arch/x86/boot/bzImage
    
   
 

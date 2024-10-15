@@ -5,6 +5,9 @@ name: Test WSL
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   test_wsl:
