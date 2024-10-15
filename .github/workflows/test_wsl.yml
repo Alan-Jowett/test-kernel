@@ -14,5 +14,6 @@ jobs:
 
     - name: Launch WSL
       run: |
+        wsl --install -d Ubuntu-24.04 --user admin --password admin
         wsl echo "Hello from WSL"
         wsl cat /etc/os-release
