@@ -1,0 +1,18 @@
+# Copyright (c) Microsoft Corporation
+# SPDX-License-Identifier: MIT
+
+name: Test WSL
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test_wsl:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Launch WSL
+      run: |
+        wsl echo "Hello from WSL"
+        wsl cat /etc/os-release
