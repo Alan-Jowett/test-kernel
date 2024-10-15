@@ -5,6 +5,11 @@ name: Build Linux Kernel
 
 on:
   workflow_dispatch:
+    inputs:
+      kernel_version:
+        description: 'Kernel Version'
+        required: true
+        default: 'master'
 
 jobs:
   build_kernel:
@@ -16,7 +21,8 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y build-essential flex bison libssl-dev libelf-dev
 
     - name: Download Linux Kernel
-      run: git clone https://github.com/torvalds/linux.git
+      run: git clone -b ${{inputs.kernel_version}} hhttps://git.kernel.org/pub/scm/linux/kernel/git/bpf/bpf-next.git
+
 
     - name: Build Linux Kernel
       run: |
