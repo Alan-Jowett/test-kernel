@@ -18,6 +18,9 @@ jobs:
     - name: Install Ubuntu 24.04 Base Image
       run: wsl --import Ubuntu-24.04 .\Ubuntu-24.04 .\ubuntu-base-24.04.1-base-amd64.tar.gz --version 2
 
+    - name: Update WSL
+      run: wsl --update
+
     - name: Launch WSL
       run: |
         wsl echo "Hello from WSL"
