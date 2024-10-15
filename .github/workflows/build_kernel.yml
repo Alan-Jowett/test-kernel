@@ -1,0 +1,36 @@
+# Copyright (c) Microsoft Corporation
+# SPDX-License-Identifier: MIT
+
+name: Build Linux Kernel
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_kernel:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: sudo apt-get update && sudo apt-get install -y build-essential flex bison libssl-dev libelf-dev
+
+    - name: Download Linux Kernel
+      run: git clone https://github.com/xdp-project/bpf-next
+
+    - name: Build Linux Kernel
+      run: |
+        cd bpf-next
+        make defconfig
+        make -j$(nproc)
+
+    - name: List Kernel Image
+      run: ls -l bpf-next/arch/x86/boot/bzImage
+
+    - name: Upload Kernel Image
+      uses: actions/upload-artifact@v2
+      with:
+        name: bzImage
+   
+   
+
